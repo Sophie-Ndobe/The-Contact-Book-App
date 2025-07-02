@@ -35,7 +35,6 @@
     <script>
 
         var id = getId();
-        //console.log("The id is:" + id);
 
         document.getElementById("homeLink").addEventListener('click', homeLink);
         document.getElementById("editContact").addEventListener('click', editContact);
@@ -58,7 +57,7 @@
             })
             .then(function(data){
                 displayOutput(data);
-                console.log(data);
+
             })
         }
 
