@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="getContacts()">
+    <div id="avatarImage"></div>
+    <form id="editForm">
+        <label for="firstname">First name</label>
+        <input type="text" name="firstname" id="firstname" readonly/>
+        <br/>
+        <label for="lastname">Last name</label>
+        <input type="text" name="lastname" id="lastname" readonly/>
+        <br/>
+        <label for="mobile">Mobile</label>
+        <input type="text" name="mobile" id="mobile" readonly/>
+        <br/>
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" readonly/>
+        <br/>
+        <label for="avatar" id="avatarLabel" hidden>Change profile image</label>
+        <input type="file" name="avatar" id="avatar" hidden/>
+        <br/>
+        <button type="submit" id="submitForm" hidden>Submit</button>
+    </form>
+    <br/>
+    <br/>
+    <button id="homeLink" type="button">Home</button>
+    <button id="editContact" type="button">Edit</button>
+    <button id="deleteContact" type="button">Delete</button>
+
+    <script src="config.js"></script>
+    <script>
+
+        document.getElementById("homeLink").addEventListener('click', homeLink);
+
+
+        var id = getId();
+        //console.log("The id is:" + id);
+
+        function getId() {
+            var url = window.location.href;
+            var pos = url.search("=");
+            var id = url.slice(pos + 1);
+
+            return id;
+        }
+
+        function getContacts(){
+            fetch(rootPath + 'controller/get-contacts/?id' + id)
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(data){
+                //display contact info
+                console.log(data);
+            })
+        }
+
+        function homeLink() {
+            window.open("index.html", "_self")
+        }
+
+    </script>
+</body>
+</html>
